@@ -4,6 +4,7 @@ const recipeController = require('../Controllers/recipeController')
 const testimonyController = require('../Controllers/testimonyController')
 const jwtMiddleware = require('../Middleware/middleware')
 const saveRecipeController = require('../Controllers/saveRecipeController')
+const downloadRecipeController = require('../Controllers/downloadController')
 
 const router = new express.Router()
 
@@ -27,5 +28,14 @@ router.get('/related-recipes', jwtMiddleware, recipeController.getRelatedRecipeC
 
 // saverecipe
 router.post('/save-recipe/:id', jwtMiddleware, saveRecipeController.addSavedRecipes)
+
+// getsaverecipe
+router.get('/save-recipe', jwtMiddleware, saveRecipeController.getUserSavedRecipeController)
+
+// deletesaverecipe
+router.delete('/save-recipe/:id/remove', jwtMiddleware, saveRecipeController.removeSavedRecipe)
+
+// downloadrecipe
+router.post('/recipe/:id/download', jwtMiddleware, downloadRecipeController.addToDownloadsController)
 
 module.exports = router
